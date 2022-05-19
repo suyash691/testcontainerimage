@@ -1,0 +1,33 @@
+on:
+  push:
+  workflow_dispatch:
+permissions:
+ packages: write
+ contents: write
+
+jobs:
+
+  publish:
+    runs-on: ubuntu-latest
+    
+        
+
+    env:
+      IMAGE: ghcr.io/arya062000/abcde
+     
+
+    steps:
+      - uses: actions/checkout@v2
+
+     
+      - name: Build image
+        run: docker pull alpine 
+
+      - name: Login to ghcr.io
+        run: docker login https://ghcr.io -u arya062000 --password-stdin <<< ${{ secrets.PAT }}
+
+      - name: Publish image
+        run: docker tag alpine ghcr.io/arya062000/abcde:latest
+        
+      - name: Push image
+        run: docker push ghcr.io/arya062000/abcde:latest # lowercase IMAGE
