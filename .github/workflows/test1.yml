@@ -14,14 +14,6 @@ jobs:
       IMAGE: ghcr.io/suyash691/abcde
  
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Build image
-        run: docker pull alpine 
-
-      - name: Login to ghcr.io
-        run: docker login https://ghcr.io -u suyash691 --password-stdin <<< ${{ secrets.PAT }}
-
       - name: Publish image
         run: |
           curl -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/orgs/suyash691/packages/containers/testcontainerimage%2Ftestdocker
