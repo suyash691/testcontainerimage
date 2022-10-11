@@ -10,16 +10,12 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     
-        
-
     env:
       IMAGE: ghcr.io/suyash691/abcde
-     
-
+ 
     steps:
       - uses: actions/checkout@v2
 
-     
       - name: Build image
         run: docker pull alpine 
 
@@ -27,7 +23,6 @@ jobs:
         run: docker login https://ghcr.io -u suyash691 --password-stdin <<< ${{ secrets.PAT }}
 
       - name: Publish image
-        run: docker tag alpine ghcr.io/suyash691/abcde:latest
+        run: |
+          curl -H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/orgs/suyash691/packages/containers/testcontainerimage%2Ftestdocker
         
-      - name: Push image
-        run: docker push ghcr.io/suyash691/abcde:latest # lowercase IMAGE
