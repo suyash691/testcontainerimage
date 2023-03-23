@@ -2,7 +2,7 @@ on:
   push:
 
 env:
-  IMAGE: ghcr.io/${{ github.repository }}-priv:latest
+  IMAGE: ghcr.io/${{ github.repository }}-pub:latest
 
 jobs:
   publish:
